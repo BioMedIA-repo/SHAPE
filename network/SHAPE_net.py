@@ -501,8 +501,6 @@ class SHAPE(nn.Module):
         self.criterionsup = DiceFocalLoss(softmax=True, reduction='mean')
         self.criterion = myDiceFocalLoss()
 
-        # === [核心修改] 实例化新的伪标签处理器 ===
-        # --- 1. 从全局 args 中获取总开关 ---
         self.use_selector_flag = getattr(args, 'use_selector', False)
         self.use_refinement_flag = getattr(args, 'use_refinement', False)
         self.use_pseudo_labels = getattr(args, 'use_pseudo_labels', False)
@@ -513,7 +511,7 @@ class SHAPE(nn.Module):
 
             class SelectorArgs:
                 def __init__(self):
-                    # self.k = 0.1  # 初始 topK 比例
+                    # self.k = 0.1 
                     self.k = getattr(args, 'selector_initial_k', 0.1)
 
             selector_args_mock = SelectorArgs()
