@@ -166,7 +166,7 @@ class StructuralScorer(nn.Module):
 
     def _get_stats_from_queue(self, device):
         shape_means = torch.zeros(self.n_class, device=device)
-        shape_stds = torch.ones(self.n_class, device=device)  # 默认为1，避免除以0
+        shape_stds = torch.ones(self.n_class, device=device)
 
         for c in range(self.n_class):
             if len(self.shape_queues[c]) > 1:

@@ -58,7 +58,7 @@ class MultiStrategyTokenGenerationHD(nn.Module):
                  patch_mix_strategy: Literal['swap', 'mixup'] = 'mixup',
                  mixup_alpha_range: tuple = (0.4, 0.6),
                  ignore_index: int = -1,
-                 proto_momentum: float = 0.99):  # 新增动量参数
+                 proto_momentum: float = 0.99):
         super().__init__()
         self.num_classes = num_classes
         self.purity_threshold = purity_threshold
@@ -158,7 +158,7 @@ class MultiStrategyTokenGenerationHD(nn.Module):
                         current_mean = s_pure_feats[s_mask].mean(0)
                         self.s_prototypes_ema[c] = self.proto_momentum * self.s_prototypes_ema[c] + \
                                                    (
-                                                               1.0 - self.proto_momentum) * current_mean.detach()  # detach 防止梯度回传到 buffer
+                                                               1.0 - self.proto_momentum) * current_mean.detach()
 
                 s_pure_distances = torch.norm(s_pure_feats - self.s_prototypes_ema[s_pure_labels], dim=-1)
 
@@ -501,8 +501,6 @@ class SHAPE(nn.Module):
         self.criterionsup = DiceFocalLoss(softmax=True, reduction='mean')
         self.criterion = myDiceFocalLoss()
 
-        # === [核心修改] 实例化新的伪标签处理器 ===
-        # --- 1. 从全局 args 中获取总开关 ---
         self.use_selector_flag = getattr(args, 'use_selector', False)
         self.use_refinement_flag = getattr(args, 'use_refinement', False)
         self.use_pseudo_labels = getattr(args, 'use_pseudo_labels', False)
@@ -513,7 +511,6 @@ class SHAPE(nn.Module):
 
             class SelectorArgs:
                 def __init__(self):
-                    # self.k = 0.1  # 初始 topK 比例
                     self.k = getattr(args, 'selector_initial_k', 0.1)
 
             selector_args_mock = SelectorArgs()
