@@ -86,7 +86,7 @@ We thank the authors for their open-sourced code and encourage users to cite the
 If the code is helpful for your research, please consider citing:
 
 ```angular2
-@ARTICLE{zhou2026shape,
+@inproceedings{zhou2026shape,
   author={Linkuan Zhou, Yinghao Xia, Yufei Shen, Xiangyu Li, Wenjie Du, Cong Cong, Leyi Wei, Ran Su, Qiangguo Jin},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
   title={SHAPE: Structure-aware Hierarchical Unsupervised Domain Adaptation with Plausibility Evaluation for Medical Image Segmentation}, 
