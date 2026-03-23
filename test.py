@@ -31,7 +31,7 @@ def get_args():
     parser.add_argument('--classes', '-c', type=int, default=5, help='Number of classes')
     parser.add_argument('--seed', type=int, default=8888, help='random seed')
     parser.add_argument('--patience', type=int, default=200, help='patience for student model')
-    parser.add_argument('--model_type', type=str, default='unet2D', choices=['unet2D'],
+    parser.add_argument('--model_type', type=str, default='shape',
                         help='Type of the model to use')
     parser.add_argument('--pth_path', type=str, help='mode to run')
     parser.add_argument('--mode', type=str, default="MR", help='mode to run')
@@ -62,7 +62,7 @@ def infer_modes_from_path(source_modality):
     return source_modality, target_modality
 
 
-def load_config(mode, config_path='config_cyc.ini'):
+def load_config(mode, config_path='config.ini'):
     print(f"Loading config from {config_path}")
     config = configparser.ConfigParser()
     config.read(config_path)
